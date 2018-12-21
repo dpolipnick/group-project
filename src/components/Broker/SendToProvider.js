@@ -42,36 +42,6 @@ const styling = theme => ({
    },
 })
 
-// const providers = [
-//    {
-//       company_id: 1,
-//       name: 'aflac',
-//       authorization_id: 4
-//    },
-//    {
-//       company_id: 2,
-//       name: 'farmers',
-//       authorization_id: 4
-//    },
-//    {
-//       company_id: 3,
-//       name: 'health partners',
-//       authorization_id: 4
-//    }
-// ]
-const Child = (props) => {
-  return (
-    props.deal
-  )
-}
-
-const newState = {
-   open: false,
-   confirmBtn: false,
-   sendBtn: false,
-   providerObj: {},
-   
-}
 
   // This was test code to test the post that creates a new quote
   // componentDidMount = () => {
@@ -89,17 +59,17 @@ const newState = {
   //     ]);
   // };
 
-//   //  ALSO TEST CODE
-// fetchProviders = () => {
-//   // Dispatch action to fetch the Providers from the server
-//   this.props.dispatch( { type: 'FETCH_PROVIDERS' } );
-// }
+  const newState = {
+   open: false,
+   confirmBtn: false,
+   sendBtn: false,
+   providerObj: {},
+   
+   }
 
 
-
-
-
-class SendToProvider extends Component {
+  let detailObjArr = []
+  class SendToProvider extends Component {
 
    state = newState;
   
@@ -111,11 +81,19 @@ class SendToProvider extends Component {
    //function to populate this component's state with all of the providers
    setProviders = () => {
       let theProviderObj = {};
-       for(let provider of this.props.providerReducer.providerReducer){
+      // let detailObjArr = []
+      for(let provider of this.props.providerReducer.providerReducer){
          console.log("provider in for loop: ", provider);
-          theProviderObj[provider.name] = null;
+         theProviderObj[provider.name] = {
+               status: null,
+               name: provider.name,
+               company: provider.company_id
+            }
+         
+         
        }
        console.log(theProviderObj)
+      //  console.log(detailObjArr)
        this.setState({
           providerObj: theProviderObj
        })
@@ -129,29 +107,35 @@ class SendToProvider extends Component {
       this.setState({open: false});
    };
    
-   handleChange = (event) => {
-      if (this.state.providerObj[event.target.name] === null){
-         this.setState({
-            confirmBtn: true,
-            providerObj: {
-               ...this.state.providerObj,
-               [event.target.name]: event.target.value
-            },
-         });
-      }
-      else {
-         this.setState({
-            providerObj: {
-               ...this.state.providerObj,
-               [event.target.name]: null
-            },
-         });
-      }
+   handleChange = (providerId) => {
+      return (event) => {
+         if (this.state.providerObj[event.target.name].status === null){
+            this.setState({
+               confirmBtn: true,
+               providerObj: {
+                  ...this.state.providerObj,
+                  [event.target.name]: {
+                     status: event.target.value,
+                     provider_id: providerId,
+                  }
+               },
+            });
+         }
+         else {
+            this.setState({
+               providerObj: {
+                  ...this.state.providerObj,
+                  [event.target.name]: null
+               },
+            });
+         }
+      }  
    }
 
    confirmUpdate = () => {
       // this.props.dispatch({type:'POST_TAGS' , payload: {project_id: this.props.theProject.id, tagInfo: this.state}})
       let providerObjValues = Object.values(this.state.providerObj)
+      console.log(providerObjValues);
       if(providerObjValues.includes("sendTo") === false){
          alert("Please select at least 1 provider")
       }
@@ -171,9 +155,6 @@ class SendToProvider extends Component {
 
          this.setState({open: false});
 
-
-
-
       }
    }
    
@@ -185,17 +166,22 @@ class SendToProvider extends Component {
       
       //loop through theProviderObj in state to get it's keys, a.k.a the provider names
       if (this.state.providerObj){
-         let providerObjKeys = Object.keys(this.state.providerObj)
+         // let providerObjArr = []
+         // providerObjArr.push(this.state.providerObj)
+         // console.log(providerObjArr)
+         console.log(this.state.providerObj.length)
+         let providerObjKeys = Object.entries(this.state.providerObj)
          console.log (providerObjKeys);
          checkBoxes = providerObjKeys.map( provider => <div>
-           <FormControlLabel
-               control={<Checkbox checked={this.state.providerObj.provider} onChange={this.handleChange} value="sendTo" />}
+            <input type="checkbox" id="" > </div> 
+            {/* <FormControlLabel
+               control={<Checkbox checked={this.state.providerObj[0]} onChange={this.handleChange()} value="sendTo" />}
                label={provider}
                name={provider}
-            /> </div>
+            />*/} 
          )
       }
-      // Conditional rendering to keep the "Add Card" button disabled until the form is completed
+      // Conditional rendering to keep the "Confirm" button disabled until a checkbox is selected
       let confirmBtn = this.state.confirmBtn === false ?
       <Button variant="contained" className={classes.customBtn} disabled>Confirm</Button>
       : <Button onClick={this.confirmUpdate} variant="contained"  className={`${classes.customBtn} ${classes.backgroundGreen}`}>Confirm</Button>

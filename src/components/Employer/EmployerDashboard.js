@@ -51,8 +51,8 @@ class UserPage extends Component {
       let tableBodyInsert;
       
       if(this.props.quotesReducer.length === 0){
-         let tableHeadInsert = <br></br>
-         let tableBodyInsert = <p>You currently have no quotes</p>
+         tableHeadInsert = <br></br>
+         tableBodyInsert = <p>You currently have no quotes</p>
       }
       else {
          tableHeadInsert =

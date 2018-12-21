@@ -30,7 +30,7 @@ class ClientTable extends Component {
   }
 
   getClients = () => {
-    this.props.dispatch( { type: 'FETCH_CLIENTS', payload: this.props.reduxState.user.user_id } );
+    this.props.dispatch( { type: 'FETCH_CLIENTS', payload: this.props.reduxState.user.company_id } );
   }
 
   render() {
@@ -50,13 +50,12 @@ class ClientTable extends Component {
             <TableBody>
               {this.props.reduxState.deals.map(row => {
                 return (
-                  <TableRow key={row.id}>
+                  <TableRow key={row.id}> 
                     <TableCell component="th" scope="row">
                     {row.name}
                     </TableCell>
                     <TableCell>{row.status}</TableCell>
-                    <TableCell><SendToProvider deal={row}/></TableCell>
-                    {/* <TableCell><button>Send To Provider</button></TableCell> */}
+                    <TableCell><SendToProvider deal_id={row.deal_id}/></TableCell>
                     <TableCell>{moment(row.date_email_sent_to_employer).format('MMMM Do YYYY')}</TableCell>
                   </TableRow>
                 );
