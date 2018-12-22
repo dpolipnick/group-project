@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import ProviderBrokerRegisterPage from './ProviderBrokerRegisterPage';
-import RegisteredUsersTable from './RegisteredUsersTable';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -24,7 +23,6 @@ class AdminDashboard extends Component {
       <div>
       <ProviderBrokerRegisterPage/>
       </div>
-      <RegisteredUsersTable/>
       </div>
       </MuiThemeProvider>
     );

@@ -9,6 +9,17 @@ import { TextField } from '@material-ui/core';
 
 class AddClient extends Component {
 
+componentDidMount = () => {
+  this.getClients();
+}
+
+getClients = () => {
+  this.props.dispatch({
+    type: 'FETCH_CLIENTS',
+    payload: this.props.reduxState.user.company_id
+  });
+}
+
   state = {
     authorization_id: 2,
     company_name: '',
@@ -34,6 +45,7 @@ class AddClient extends Component {
       if (response.data.msg === 'success'){
         swal("Great job!", "Registration Successful!! Email Sent!!", "success");
         this.clearInputs();
+        this.getClients();
       }
       else if(response.data.msg === 'fail'){
         swal("WARNING!", "Email failed to send.", "warning");

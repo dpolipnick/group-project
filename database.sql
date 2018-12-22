@@ -19,18 +19,7 @@ CREATE TABLE "companies" (
     "authorization_id" INTEGER references authorizations
 );
 
-INSERT INTO "companies" ("name", "authorization_id")
-VALUES 
-('administrator_company1', 1),
-('employer_company1', 2),
-('employer_company2', 2),
-('employer_company3', 2),
-('broker_company1', 3),
-('broker_company2', 3),
-('broker_company3', 3),
-('provider_company1', 4),
-('provider_company2', 4),
-('provider_company3', 4);
+
 
 
 --  The users table lists all the users 
@@ -48,20 +37,7 @@ CREATE TABLE "users" (
     "company_id" INTEGER references companies
 );
 
-INSERT INTO "users" ("username", "password", "company_id")
-VALUES 
-('Neesha', 'MADAMADMIN', 1),
-('Inmar_the_admin', 'Inmar_the_admin', 1),
-('administrator_user1', 'administrator_user1', 1),
-('Shirley65', 'Shirley65', 2),
-('EmployerHideki', 'EmployerHideki', 3),
-('employer_user1', 'employer_user1', 4),
-('Jamal', 'BigSales2019', 5), 
-('BrokerAbdul', 'BrokerAbdul', 6),
-('broker_user1', 'broker_user1', 7),
-('Diamond', 'AffleckUser', 7), 
-('ProviderPeggie', 'ProviderPeggie', 8),
-('provider_user1', 'provider_user1', 9);
+
 
 --  Deal_statuses table lists the possible statuses
 --  for a deal which might be waiting for different
@@ -89,11 +65,6 @@ CREATE TABLE "deals" (
     "csv_url" VARCHAR (1000) DEFAULT NULL
 );
 
-INSERT INTO "deals" ("employer_id", "broker_id", "date_email_sent_to_employer", "deal_status_id")
-VALUES 
-(2, 5, '01-01-2018', 1),
-(3, 6, '01-02-2018', 2),
-(4, 7, '01-03-2018', 3);
 
 --  Quotes table lists quotes for a deal (between a 
 --  broker and an employer) from a provider
@@ -108,20 +79,6 @@ CREATE TABLE "quotes" (
     "provider_response_message" VARCHAR (1000) DEFAULT NULL,
     "provider_response_file_location" VARCHAR (1000) DEFAULT NULL
 );
-
-INSERT INTO "quotes" (
-    "provider_id", 
-    "deal_id", 
-    "date_data_sent_to_provider",
-    "date_of_provider_decision", 
-    "sent_to_provider",
-    "decision_complete", 
-    "provider_response_message", 
-    "provider_response_file_location")
-VALUES 
-(8, 3, '01-04-2018', '01-05-2018', TRUE, TRUE, 'Approved', 'www.google.com'),
-(9, 3, '01-04-2018', '01-05-2018', TRUE, TRUE, 'Denied:  Need more info', 'www.google.com'),
-(10, 3, '01-04-2018', NULL, TRUE, FALSE, NULL, NULL);
 
 --  Employee table contains all uploaded datasets of employees
 --  for all deals
@@ -141,33 +98,3 @@ CREATE TABLE "employees" (
     "is_valid" BOOLEAN DEFAULT FALSE
 );
 
-
-INSERT INTO "employees" (
-    "deal_id",
- 
-    "employer_supplied_unique_id",
-    "date_of_birth",
-    "date_of_hire",
-    "union",
-    "role", 
-    "salary_per_year", 
-    "gender", 
-    "status", 
-    "state",
-    "employer_supplied_company_code",
-
-    "is_valid"
-)
-VALUES 
-(1, 6902, '05-06-1972', '08-14-2012', FALSE, 'quality assurance', 63487, 'male', 'Active', 'Alabama', 103, TRUE),
-(1, 6903, '05-07-1972', '08-15-2013', FALSE, 'qa', 6347, 'male', 'Active', 'Alabama', 103, TRUE),
-(2, 2481, '05-06-1984', '08-14-2010', TRUE, 'CEO', 245621, 'other', 'Active', 'Vermont', 205, TRUE ),
-(3, 8765, '05-06-1990', '08-14-2014', TRUE, 'Attorney', 48888, 'NA', 'Active', 'MN', 056, TRUE );
-
---Testing Data--
-
-SELECT "quotes".*,"deals"."csv_url", "broker"."name" as "broker", "employer"."name" as "employer" FROM "quotes"
-JOIN "deals" on "quotes"."deal_id" ="deals"."deal_id"
-JOIN "companies" as "broker" on "deals"."broker_id" ="broker"."company_id"
-JOIN "companies" as "employer" on "deals"."employer_id" ="employer"."company_id"
-WHERE "provider_id"=8;
