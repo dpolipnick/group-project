@@ -9,7 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import ResponseIcon from '@material-ui/icons/Feedback';
 import WaitingIcon from '@material-ui/icons/AccessTime';
 import DownloadIcon from '@material-ui/icons/Archive';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import UploadButton from '../Employer/FileUpload';
 import axios from 'axios';
 
@@ -102,10 +101,6 @@ class UserPage extends Component {
       return(
          
          <div>
-            <div>
-               <LogOutButton className="log-in"/>
-               <h1 className={classes.alignCenter}>Dashboard</h1>
-            </div>
             <Table className={classes.tableFormat}>
                <TableHead>
                   {tableHeadInsert}
