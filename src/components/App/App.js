@@ -19,6 +19,7 @@ import ProviderDashboard from '../Provider/ProviderDashboard';
 import EmployerDashboard from '../Employer/EmployerDashboard';
 import LoginPage from '../LoginPage/LoginPage';
 import AboutPage from '../AboutPage/AboutPage';
+import AddClient from '../Broker/AddClient';
 
 // Styles
 
@@ -59,6 +60,11 @@ class App extends Component {
               path="/dashboard"
               component={ProviderDashboard}
             />
+              <Route
+              exact
+              path="/addclient"
+              component={AddClient}
+            />
             {/* <Route
               exact
               path="/send"
@@ -81,6 +87,7 @@ class App extends Component {
               // the component the employer sees when they log in  with authorization_id = 4
               component4={ProviderDashboard}
             />
+         
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             {/* <ProtectedRoute

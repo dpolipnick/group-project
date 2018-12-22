@@ -8,7 +8,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import AddClient from './AddClient';
+
 
 
 import ClientTable from './ClientTable';
@@ -90,7 +90,6 @@ class BrokerDashboard extends Component {
             {value === 1 && <TabContainer><QuoteTable/></TabContainer>}
           </div>
         </NoSsr>
-        <AddClient/>
       </MuiThemeProvider>
     );
   }

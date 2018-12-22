@@ -100,7 +100,6 @@ getClients = () => {
     return (
       <div>
         <div align="center">
-        {JSON.stringify(this.props.reduxState.user.user_id)}
         <h1>Add a New Client</h1>
         </div>
         <form onSubmit={this.registerUser}>

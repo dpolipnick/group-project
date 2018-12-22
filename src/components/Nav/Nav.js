@@ -22,6 +22,13 @@ const Nav = (props) => (
           <LogOutButton className="nav-link"/>
         </>
       )}
+        { props.user.authorization_id === 3 && (
+        <>
+            <Link className="nav-link" to="/addclient">
+        Add a New Client
+      </Link>
+        </>
+      )}
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">
         About
