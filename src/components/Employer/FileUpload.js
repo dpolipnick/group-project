@@ -126,9 +126,9 @@ class FileUpload extends Component {
       const {classes} = this.props;
       console.log(this.state);
       
-      let confirmButton = this.state.disableButton === true ?
-      <Button type="submit" className={classes.dialogConfirmBtn} variant="contained" disabled>Confirm</Button>
-      : <Button onClick={this.updateUrl} className={classes.dialogConfirmBtn} variant="contained">Confirm</Button>
+      // let confirmButton = this.state.disableButton === true ?
+      // <Button type="submit" className={classes.dialogConfirmBtn} variant="contained" disabled>Confirm</Button>
+      // : <Button onClick={this.updateUrl} className={classes.dialogConfirmBtn} variant="contained">Confirm</Button>
 
       return (
          <section>
