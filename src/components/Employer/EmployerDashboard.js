@@ -10,7 +10,7 @@ import ResponseIcon from '@material-ui/icons/Feedback';
 import WaitingIcon from '@material-ui/icons/AccessTime';
 import DownloadIcon from '@material-ui/icons/Archive';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import UploadButton from '../Employer/FileUpload';
+import FileUpload from '../Employer/FileUpload';
 import axios from 'axios';
 
 const styling = theme => ({
@@ -116,7 +116,7 @@ class UserPage extends Component {
             </Table>
             <div className={classes.alignCenter}>
                <p>After your first upload, upload another csv ONLY if requested by a broker or provider:</p>
-               <UploadButton/>
+               <FileUpload/>
                {/* <Button className={classes.csvButton} variant="contained">Upload csv</Button> */}
             </div>
          </div>

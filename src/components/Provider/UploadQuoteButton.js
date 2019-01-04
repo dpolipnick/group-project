@@ -123,10 +123,10 @@ class UploadQuoteButton extends Component {
             })
             .then((result) => {
                this.updateUrl();
-            })
+            }) // end .then
             .catch((error) => {
                console.log('Error with uploadFile function after complete');
-            });
+            }); // end .catch
          } // end (complete)
       ) // end uploadTask.on
    }

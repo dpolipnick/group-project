@@ -1,6 +1,9 @@
+// Vendors
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {storage} from '../firebase/config';
+import swal from 'sweetalert';
+// Styles
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -46,6 +49,13 @@ class FileUpload extends Component {
 
    state = newState;
 
+   // // Updates State to include the quote's ID for updates
+   // componentDidMount = () => {
+   //    this.setState({
+   //       deal_id: this.props.deal_id,
+   //    });
+   // };
+
    handleOpenClick = () => {
       this.setState({ open: true });
    };
@@ -70,7 +80,7 @@ class FileUpload extends Component {
    uploadCsv = () => {
       console.log(this.state);
       if(this.state.csvFile === null){
-         alert(`* Please select a csv file locally from your computer`);
+         swal("WARNING!", "Please select a .csv file locally from your computer!", "warning");
          return
       }
       //ref has a function called put
@@ -90,14 +100,21 @@ class FileUpload extends Component {
          //complete function parameter
          storage.ref('employer_files').child(this.state.csvFile.name).getDownloadURL().then(thisUrl => {
             console.log(thisUrl);
-            alert('File successfully uploaded!');
+            swal("Great job!", "File successfully uploaded!", "success");
             this.setState({
                csv_url: thisUrl,
                disableButton: false
             });
          })
-      });
-   }
+         .then((result) => {
+            this.updateUrl();
+         }) // end .then
+         .catch((error) => {
+            console.log('Error with uploadFile function after complete');
+         }); // end .catch
+      } // end (complete)
+   ) // end uploadTask.on
+}
    
    updateUrl = () => {
       this.props.dispatch({type: 'UPDATE_CSV_URL', payload: this.state})
@@ -125,22 +142,24 @@ class FileUpload extends Component {
             >
             <DialogTitle id="dialog-title">Upload a .csv file</DialogTitle>
             <DialogContent>
-               <DialogContentText>1. Click the "Choose File" button<br/>2. Click the "Upload" button to save<br/>3. Confirm changes</DialogContentText>
-                  <form>
+               <DialogContentText>1. Click the "Choose File" button to upload a .csv file from your computer.<br/>2. Click the Upload button.<br/>3. You will be brought to a new page to organize your data.</DialogContentText>
+                  {/* <form> */}
                      <FormGroup>
                         <FormControl >
                            <input  type="file" onChange={this.selectImage}/>
-                           <Button onClick={this.uploadCsv} className={classes.csvButton}>Upload</Button>
+                           {/* <Button onClick={this.uploadCsv} className={classes.csvButton}>Upload</Button> */}
                            <br/>
                            {/* <div>
                               <img src={this.state.csv_url || 'https://via.placeholder.com/280x200'} alt="Upload image" height="280" width="200"></img>
                            </div> */}
                         </FormControl>
                      </FormGroup>
-                  </form>
+                  {/* </form> */}
             </DialogContent>
             <DialogActions>
-               {confirmButton}
+            <Button onClick={this.uploadCsv} className={classes.csvButton}>Upload</Button>
+
+               {/* {confirmButton} */}
                <Button onClick={this.handleCloseClick} className={classes.dialogCancelBtn} variant="contained">Cancel</Button>
             </DialogActions>
          </Dialog>
