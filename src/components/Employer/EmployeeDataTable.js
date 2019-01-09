@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 // Styles
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 // Components
 import ColumnDropdown from './ColumnDropdown'
+import { red } from '@material-ui/core/colors';
 
 const styling = theme => ({
    alignCenter: {
@@ -34,6 +35,14 @@ const styling = theme => ({
       marginRight: '2%',
       padding: 10,
       overflowX: 'auto',
+      backgroundColor: '#D4D2D2',
+   },
+   instructions: {
+      marginTop: theme.spacing.unit * 3,
+      marginLeft: '2%',
+      marginRight: '2%',
+      padding: 10,
+      overflowX: 'auto',
    },
    //styling for employer columns
    columns: {
@@ -42,6 +51,10 @@ const styling = theme => ({
       marginRight: '1%',
       padding: 10,
       overflowX: 'auto',
+   },
+   labels: {
+      backgroundColor: '#1a3d50',
+      color: '#ffffff',
    },
 });
 
@@ -127,7 +140,7 @@ class EmployeeDataTable extends Component {
          );
 
          tableBodyInsert =  
-            <TableRow>
+            <TableRow className={classes.labels}>
                {this.props.columnsReducer.map(column =>
                   <TableCell>{column}</TableCell>
                )}
@@ -161,13 +174,13 @@ class EmployeeDataTable extends Component {
       return(
          <div>
             <Paper className={classes.columnPage} elevation={15}>
+               <Paper className={classes.instructions}>
                <h1>Check Your Data</h1>
                <div className={`${classes.width}`}>
-                  <ul>
-                     <li>This is only a small sample of the larger data set of employees.</li>
-                     <li>Please make sure each column of data matches its corresponding header.</li>
-                  </ul>
+                  <p>1. This is only a small sample of the data you have uploaded.</p>
+                  <p>2. Please make sure each column dropdown menu matches the data it belongs to below.</p>
                </div>
+               </Paper>
                <Paper className={classes.columns} elevation={2}>
                   <Table>
                      <TableHead>
