@@ -43,6 +43,7 @@ class ColumnDropdown extends Component {
       console.log(this.props.columnsReducer)
       this.props.renderFunction();
       this.setState({ label: event.target.value });
+      console.log('state: ', this.state)
     };
    
    render(){
@@ -60,16 +61,16 @@ class ColumnDropdown extends Component {
                   onChange={this.handleChange()}
                   input={<FilledInput name="label" id="filled-label-native-simple" />}
                >
-                  <option key='default' disabled={true} value="">Select Column Label</option>
-                  <option value='employer_supplied_unique_id'>Employee's Unique ID</option>
-                  <option value='date_of_birth'>Employee's Date of Birth</option>
-                  <option value='date_of_hire'>Employee's Date of Hire</option>
+                  <option disabled={true} value="">{this.props.columnObject}</option>
+                  <option value='employer_supplied_unique_id'>Employee Unique ID</option>
+                  <option value='date_of_birth'>Employee Date of Birth</option>
+                  <option value='date_of_hire'>Employee Date of Hire</option>
                   <option value='union'>Union or Non-Union</option>
-                  <option value='salary_per_year'>Employee's Salary</option>
-                  <option value='gender'>Employee's Gender</option>
+                  <option value='salary_per_year'>Employee Salary</option>
+                  <option value='gender'>Employee Gender</option>
                   <option value='status'>Employment Status (retired, active, LOA, etc.)</option>
-                  <option value='state'>Employee's State of Residence</option>
-                  <option value='role'>Employee's Role</option>
+                  <option value='state'>Employee State of Residence</option>
+                  <option value='role'>Employee Role</option>
                   <option value='employer_supplied_company_code'>Company Code</option>
                   <option value='other'>Other</option>
                </Select>

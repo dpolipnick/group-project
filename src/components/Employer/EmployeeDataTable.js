@@ -160,6 +160,9 @@ class EmployeeDataTable extends Component {
       }
       if (this.props && this.props.employeesReducer.length > 0 && this.props.columnsReducer.length === 0){
          console.log(this.props.employeesReducer[0].length)
+         //  call a function that creates an array of header dropdown values based on 
+         //  header dropdown choice values (in local state of child component) and  
+         //  and the incoming from file column headings (in reduxState?)
          this.props.dispatch({type:'SET_COLUMNS', payload: this.props.employeesReducer[0][0].length})
       }
       if(this.props && this.props.employeesReducer.length > 0 && this.props.columnsReducer.length > 0){
@@ -177,9 +180,19 @@ class EmployeeDataTable extends Component {
             <p>3. Click the "Confirm" button when all columns are complete to send your data.</p>
          </div>
          
-         tableHeadInsert = this.props.employeesReducer[0][0].map((column, index) =>
-            <TableCell style={{padding: 5,}}><ColumnDropdown index={index} columnRowLength={null} renderFunction={this.renderFunction}/></TableCell>)
-         
+        //  tableHeadInsert = this.props.employeesReducer[0][0].map((column, index) =>
+        //     <TableCell style={{padding: 5,}}><ColumnDropdown index={index} columnRowLength={null} renderFunction={this.renderFunction}/></TableCell>)
+        // tableHeadInsert = this.props.employeesReducer[1][0].map((column, index) =>
+        
+        // <TableCell style={{padding: 5,}}><ColumnDropdown columnObject={columnSelectionHeadingArray} index={index} columnRowLength={null} renderFunction={this.renderFunction}/> </TableCell>)
+     
+        
+        const columnSelectionHeadingArray = ["Employee Unique ID","Employee Date of Birth","Employee Date of Hire","Union or Non-Union","Employee Salary","Employee Gender","Employment Status (retired, active, LOA, etc.)","Employee State of Residence","Employee Role","Company Code"];
+        
+        tableHeadInsert = columnSelectionHeadingArray.map((column, index) =>
+        
+        <TableCell style={{padding: 5,}}><ColumnDropdown columnObject={column} index={index} columnRowLength={null} renderFunction={this.renderFunction}/> </TableCell>)
+     
         tableBodyInsert1 = <TableRow style={{backgroundColor: '#6B6B6B',}}>
          {this.props.employeesReducer[1][0].map(data => 
             <TableCell style={{padding: 5,color: '#FFFFFF',}}>{data}</TableCell>
