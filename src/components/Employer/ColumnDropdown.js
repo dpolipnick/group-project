@@ -50,17 +50,25 @@ class ColumnDropdown extends Component {
       return(
          
          <div>
-
+                {
+                   JSON.stringify(this.props.columnsReducer)
+                }
             <FormControl  variant="filled" className={this.props.formControl}>
                <InputLabel htmlFor="filled-label-native-simple"></InputLabel>
                <Select
                   
                   native
                   value={this.state.label}
-                  onChange={this.handleChange()}
+                  // onChange={this.handleChange()}
+                  onChange = {
+                     this.props.dispatch({
+                        type: 'SET_COLUMNS',
+                        payload: [this.props.index, this.props.columnObject]
+                     })
+                  }
                   input={<FilledInput name="label" id="filled-label-native-simple" />}
                >
-                  <option key='default' disabled={true} value="">Select Column Label</option>
+                  <option key='default' disabled={true} value="">{this.props.columnObject}</option>
                   <option value='employer_supplied_unique_id'>Employee's Unique ID</option>
                   <option value='date_of_birth'>Employee's Date of Birth</option>
                   <option value='date_of_hire'>Employee's Date of Hire</option>

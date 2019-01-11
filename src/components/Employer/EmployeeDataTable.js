@@ -212,9 +212,19 @@ class EmployeeDataTable extends Component {
             <p>3. Click the "Confirm" button when all columns are complete to send your data.</p>
          </div>
          
-         tableHeadInsert = this.props.employeesReducer[0][0].map((column, index) =>
-            <TableCell style={{padding: 5,}}><ColumnDropdown index={index} columnRowLength={null} renderFunction={this.renderFunction}/></TableCell>)
+      //    tableHeadInsert = this.props.employeesReducer[0][0].map((column, index) =>
+      //       <TableCell style={{padding: 5,}}><ColumnDropdown index={index} columnRowLength={null} renderFunction={this.renderFunction}/></TableCell>)
          
+      //   tableBodyInsert1 = <TableRow style={{backgroundColor: '#6B6B6B',}}>
+      //    {this.props.employeesReducer[1][0].map(data => 
+      //       <TableCell style={{padding: 5,color: '#FFFFFF',}}>{data}</TableCell>
+         
+         const columnSelectionHeadingArray = ["Employee Unique ID","Employee Date of Birth","Employee Date of Hire","Union or Non-Union","Employee Salary","Employee Gender","Employment Status (retired, active, LOA, etc.)","Employee State of Residence","Employee Role","Company Code", "Other"];
+        
+        tableHeadInsert = columnSelectionHeadingArray.map((column, index) =>
+         
+        <TableCell style={{padding: 5,}}><ColumnDropdown columnObject={column} index={index} columnRowLength={null} renderFunction={this.renderFunction}/> </TableCell>)
+     
         tableBodyInsert1 = <TableRow style={{backgroundColor: '#6B6B6B',}}>
          {this.props.employeesReducer[1][0].map(data => 
             <TableCell style={{padding: 5,color: '#FFFFFF',}}>{data}</TableCell>
