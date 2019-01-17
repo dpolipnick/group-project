@@ -214,6 +214,7 @@ router.post('/deleteData', (req, res) => {
 
 router.post('/addOnlyTables', (req, res) => {
     console.log(req.body);
+    const password1 = encryptLib.encryptPassword('a');
     pool.query(`
 
     CREATE TABLE "authorizations"
@@ -297,6 +298,17 @@ CREATE TABLE "quotes"
     "provider_response_message" VARCHAR (1000) DEFAULT NULL,
     "provider_response_file_location" VARCHAR (1000) DEFAULT NULL
 );
+
+--  Also insert an admin user
+
+--  Need a company for the admin user to belong to
+INSERT INTO "companies" ("name", "authorization_id")
+VALUES 
+('administrator_company1', 1);
+
+INSERT INTO "users" ("username", "password", "company_id")
+                VALUES 
+                ('admin1', '${password1}', 1);
  
     `)
         .then((result) => {
