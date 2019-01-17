@@ -93,8 +93,8 @@ Allows for an email to be sent to users as they are registered.
 ![Table](documentation/images/Provider_Upload_Quote_Page.png)
 
 ### Software Engineers On This Project
-- [Dick Polipnick] (https://github.com/dpolipnick)
-- [Jessica Stephens] (https://github.com/jeslstep)
-- [Malik Glass] (https://github.com/Malik-G)
-- [Peter Midthun] (https://github.com/petermidthun)
-- [Thomas Angelo Pinataro] (https://github.com/thomasangelop)
+- [Dick Polipnick](https://github.com/dpolipnick)
+- [Jessica Stephens](https://github.com/jeslstep)
+- [Malik Glass](https://github.com/Malik-G)
+- [Peter Midthun](https://github.com/petermidthun)
+- [Thomas Angelo Pinataro](https://github.com/thomasangelop)
